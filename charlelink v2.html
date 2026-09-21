@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CharleLink | Création de Sites Web Professionnels à Charleroi</title>
+    <meta name="description" content="CharleLink conçoit des sites web professionnels, rapides et optimisés pour les entreprises de Charleroi. Design sur mesure, responsive, SEO intégré. Devis gratuit.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://charlelink.netlify.app">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CharleLink | Création de Sites Web à Charleroi">
+    <meta property="og:description" content="Sites web professionnels pour les entreprises de Charleroi. Design sur mesure, rapide, optimisé SEO.">
+    <meta property="og:url" content="https://charlelink.netlify.app">
+    <meta property="og:locale" content="fr_BE">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "CharleLink",
+      "description": "Création de sites web professionnels pour les entreprises de Charleroi",
+      "url": "https://charlelink.netlify.app",
+      "email": "charlelink6000@gmail.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "Charleroi", "addressCountry": "BE" }
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cream: #F5F3EE;
+            --navy:  #1C3356;
+            --gold:  #C6A84E;
+            --goldl: #D4B86A;
+            --text:  #1A1A1A;
+            --muted: #6B7280;
+            --line:  #E0DDD6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            cursor: none;
+        }
+
+        /* ── CURSEUR ── */
+        .cursor {
+            position: fixed; width: 10px; height: 10px;
+            background: var(--gold); border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            transform: translate(-50%,-50%);
+            transition: width .3s, height .3s;
+            mix-blend-mode: multiply;
+        }
+        .cursor-ring {
+            position: fixed; width: 40px; height: 40px;
+            border: 1.5px solid rgba(198,168,78,.5);
+            border-radius: 50%; pointer-events: none; z-index: 9998;
+            transform: translate(-50%,-50%);
+            transition: width .3s, height .3s, border-color .3s;
+        }
+        .cursor-glow {
+            position: fixed; width: 400px; height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(198,168,78,.06) 0%, transparent 70%);
+            pointer-events: none; z-index: 0;
+            transform: translate(-50%,-50%);
+        }
+        a, button { cursor: none; }
+
+        /* ── REVEALS ── */
+        .js-ready .reveal       { opacity:0; transform:translateY(50px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+        .js-ready .reveal-left  { opacity:0; transform:translateX(-50px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+        .js-ready .reveal-scale { opacity:0; transform:scale(.88); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+        .reveal.visible, .reveal-left.visible, .reveal-scale.visible { opacity:1!important; transform:none!important; }
+        .d1{transition-delay:.05s} .d2{transition-delay:.15s} .d3{transition-delay:.25s}
+        .d4{transition-delay:.35s} .d5{transition-delay:.45s} .d6{transition-delay:.55s}
+
+        /* ── HEADER ── */
+        header {
+            position: fixed; top:0; left:0; right:0; z-index:100;
+            display:flex; justify-content:space-between; align-items:center;
+            padding: 0 56px; height: 72px;
+            background: rgba(245,243,238,.93);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
+            transition: box-shadow .3s;
+        }
+        header.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,.08); }
+
+        .logo { display:flex; align-items:center; gap:12px; text-decoration:none; font-size:20px; font-weight:800; letter-spacing:-.4px; }
+        .logo-icon {
+            width:38px; height:38px;
+            background: linear-gradient(135deg, var(--navy) 0%, #26446a 100%);
+            border-radius:8px; display:flex; justify-content:center; align-items:center;
+            transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+        }
+        .logo:hover .logo-icon { transform: rotate(-8deg) scale(1.08); }
+        .logo-icon svg { width:22px; height:22px; }
+        .logo-name { color:var(--navy); }
+        .logo-name span { color:var(--gold); }
+
+        nav { display:flex; align-items:center; gap:6px; }
+        nav a { padding:8px 14px; text-decoration:none; color:var(--muted); font-size:13px; font-weight:500; border-radius:6px; transition:color .2s, background .2s; }
+        nav a:hover { color:var(--navy); background:rgba(28,51,86,.06); }
+        .nav-cta { background:var(--navy)!important; color:white!important; padding:8px 20px!important; font-weight:600!important; transition:background .2s, transform .2s!important; }
+        .nav-cta:hover { background:#26446a!important; transform:translateY(-1px)!important; }
+
+        .hamburger { display:none; flex-direction:column; gap:5px; border:none; background:none; padding:8px; }
+        .hamburger span { display:block; width:22px; height:1.5px; background:var(--navy); border-radius:2px; }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            padding-top: 72px;
+        }
+
+        .hero-left {
+            background: var(--cream);
+            padding: 80px 56px;
+            display: flex; flex-direction:column; justify-content:center;
+            position: relative; overflow: hidden;
+        }
+
+        .hero-left::after {
+            content:''; position:absolute; bottom:-60px; right:-60px;
+            width:240px; height:240px;
+            border:1px solid rgba(198,168,78,.1); border-radius:50%;
+            pointer-events:none;
+        }
+
+        .hero-tag {
+            display:inline-flex; align-items:center; gap:10px;
+            font-size:11px; font-weight:600; letter-spacing:2px;
+            text-transform:uppercase; color:var(--gold); margin-bottom:36px;
+            opacity:0; animation: fadeUp .8s cubic-bezier(.16,1,.3,1) .2s forwards;
+        }
+        .hero-tag::before { content:''; width:24px; height:1px; background:var(--gold); }
+
+        .hero-left h1 {
+            font-family:'DM Serif Display', Georgia, serif;
+            font-size:68px; line-height:1.05; color:var(--navy);
+            letter-spacing:-1.5px; margin-bottom:28px;
+            opacity:0; animation: fadeUp .9s cubic-bezier(.16,1,.3,1) .35s forwards;
+        }
+        .hero-left h1 em { font-style:italic; color:var(--gold); }
+
+        .hero-left p {
+            font-size:16px; color:var(--muted); line-height:1.8;
+            font-weight:300; max-width:420px; margin-bottom:48px;
+            opacity:0; animation: fadeUp .9s cubic-bezier(.16,1,.3,1) .5s forwards;
+        }
+
+        .hero-actions {
+            display:flex; gap:14px; flex-wrap:wrap;
+            opacity:0; animation: fadeUp .9s cubic-bezier(.16,1,.3,1) .65s forwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(30px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+
+        .btn-dark {
+            display:inline-block; background:var(--navy); color:white;
+            padding:14px 32px; text-decoration:none; font-size:13px;
+            font-weight:600; border-radius:6px;
+            transition: background .2s, transform .2s, box-shadow .2s;
+        }
+        .btn-dark:hover { background:#26446a; transform:translateY(-2px); box-shadow:0 12px 28px rgba(28,51,86,.3); }
+
+        .btn-line {
+            display:inline-block;
+            border-bottom:1.5px solid var(--navy); color:var(--navy);
+            padding:14px 4px; text-decoration:none; font-size:13px; font-weight:500;
+            transition: color .2s, border-color .2s;
+        }
+        .btn-line:hover { color:var(--gold); border-color:var(--gold); }
+
+        /* Hero right — Three.js canvas */
+        .hero-right {
+            background: var(--navy);
+            position: relative; overflow: hidden;
+            display: flex; flex-direction:column;
+            justify-content:flex-end; align-items:center;
+            padding-bottom: 40px;
+        }
+
+        #three-hero { position:absolute; inset:0; }
+
+        .hero-stat {
+            position:relative; z-index:2; text-align:center; color:white;
+            opacity:0; animation: fadeUp .9s cubic-bezier(.16,1,.3,1) 1.1s forwards;
+        }
+        .hero-stat strong {
+            display:block;
+            font-family:'DM Serif Display', Georgia, serif;
+            font-size:48px; color:var(--gold); letter-spacing:-1px;
+        }
+        .hero-stat span {
+            font-size:11px; letter-spacing:2px;
+            text-transform:uppercase; color:rgba(255,255,255,.4); font-weight:400;
+        }
+
+        /* ── VALEURS ── */
+        .values {
+            background: var(--navy);
+            border-top: 1px solid rgba(255,255,255,.06);
+            padding: 0 56px;
+        }
+        .values-inner {
+            max-width:1100px; margin:0 auto;
+            display:grid; grid-template-columns:repeat(3,1fr);
+        }
+        .value-item {
+            padding: 44px 0; border-right:1px solid rgba(255,255,255,.06);
+            display:flex; align-items:center; gap:20px;
+            padding-right: 40px; padding-left:40px;
+            transition: background .2s;
+        }
+        .value-item:first-child { padding-left:0; }
+        .value-item:last-child { border-right:none; }
+        .value-item:hover { background: rgba(198,168,78,.04); }
+        .value-icon {
+            width:40px; height:40px; flex-shrink:0;
+            border:1px solid rgba(198,168,78,.3); border-radius:8px;
+            display:flex; justify-content:center; align-items:center;
+        }
+        .value-icon svg { width:18px; height:18px; stroke:var(--gold); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+        .value-text strong { display:block; font-size:14px; font-weight:600; color:white; margin-bottom:4px; }
+        .value-text span { font-size:13px; color:rgba(255,255,255,.4); font-weight:300; }
+
+        /* ── DELIVERABLES ── */
+        .deliverables { background:white; padding:96px 56px; }
+        .deliv-inner { max-width:1100px; margin:0 auto; }
+        .deliv-top {
+            display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:end;
+            margin-bottom:64px; padding-bottom:48px; border-bottom:1px solid var(--line);
+        }
+        .deliv-tag { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+        .deliv-top h2 { font-family:'DM Serif Display',Georgia,serif; font-size:42px; color:var(--navy); line-height:1.15; letter-spacing:-.5px; }
+        .deliv-top p { font-size:15px; color:var(--muted); line-height:1.8; font-weight:300; align-self:center; }
+
+        .deliv-rows { display:flex; flex-direction:column; }
+        .deliv-row {
+            display:grid; grid-template-columns:64px 1fr 1fr; gap:24px;
+            padding:32px 0; border-bottom:1px solid var(--line);
+            align-items:start; transform-style:preserve-3d;
+            will-change:transform; transition:transform .15s ease;
+        }
+        .deliv-row:hover .deliv-num { color:var(--gold); opacity:1; }
+        .deliv-row:hover .deliv-title { color:var(--gold); }
+        .deliv-num { font-family:'DM Serif Display',Georgia,serif; font-size:28px; color:var(--navy); opacity:.2; line-height:1; padding-top:2px; transition:all .3s; }
+        .deliv-title { font-size:16px; font-weight:600; color:var(--navy); transition:color .3s; padding-top:3px; }
+        .deliv-desc { font-size:14px; color:var(--muted); line-height:1.85; font-weight:300; }
+
+        /* ── PROCESS ── */
+        .process { background:var(--navy); padding:96px 56px; }
+        .process-inner { max-width:1100px; margin:0 auto; }
+        .process-head { display:flex; align-items:center; gap:24px; margin-bottom:72px; }
+        .process-tag { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); white-space:nowrap; }
+        .process-line { flex:1; height:1px; background:rgba(255,255,255,.1); }
+        .process-head h2 { font-family:'DM Serif Display',Georgia,serif; font-size:40px; color:white; letter-spacing:-.5px; line-height:1.2; white-space:nowrap; }
+        .process-steps { display:grid; grid-template-columns:repeat(3,1fr); }
+        .process-step {
+            padding:48px 40px;
+            border-right:1px solid rgba(255,255,255,.08);
+            border-top:1px solid rgba(255,255,255,.08);
+            transform-style:preserve-3d; will-change:transform;
+            transition:border-color .3s, transform .15s ease;
+            position:relative; overflow:hidden;
+        }
+        .process-step::before { content:''; position:absolute; inset:0; background:rgba(198,168,78,.04); opacity:0; transition:opacity .3s; }
+        .process-step:hover::before { opacity:1; }
+        .process-step:last-child { border-right:none; }
+        .step-num { font-family:'DM Serif Display',Georgia,serif; font-size:56px; color:var(--gold); opacity:.25; line-height:1; margin-bottom:28px; transition:opacity .3s; }
+        .process-step:hover .step-num { opacity:.5; }
+        .process-step h3 { font-size:16px; font-weight:600; color:white; margin-bottom:14px; }
+        .process-step p { font-size:14px; color:rgba(255,255,255,.45); line-height:1.85; font-weight:300; }
+
+        /* ── FAQ ── */
+        .faq { background:var(--cream); padding:96px 56px; }
+        .faq-inner { max-width:800px; margin:0 auto; }
+        .faq-header { text-align:center; margin-bottom:64px; }
+        .faq-tag { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+        .faq-header h2 { font-family:'DM Serif Display',Georgia,serif; font-size:38px; color:var(--navy); letter-spacing:-.5px; }
+
+        .faq-item { border-bottom:1px solid var(--line); }
+        .faq-question {
+            padding:28px 0; display:flex; justify-content:space-between; align-items:center;
+            font-size:16px; font-weight:600; color:var(--navy); gap:24px;
+            transition: color .2s;
+        }
+        .faq-question:hover { color:var(--gold); }
+        .faq-question .faq-icon {
+            width:28px; height:28px; flex-shrink:0;
+            border:1.5px solid var(--line); border-radius:50%;
+            display:flex; justify-content:center; align-items:center;
+            transition: transform .4s cubic-bezier(.16,1,.3,1), border-color .2s, background .2s;
+        }
+        .faq-question .faq-icon svg { width:12px; height:12px; stroke:var(--navy); fill:none; stroke-width:2.5; stroke-linecap:round; transition:stroke .2s; }
+        .faq-item.open .faq-icon { transform:rotate(45deg); border-color:var(--gold); background:var(--gold); }
+        .faq-item.open .faq-icon svg { stroke:white; }
+        .faq-answer { max-height:0; overflow:hidden; transition:max-height .5s cubic-bezier(.16,1,.3,1), padding .4s; }
+        .faq-answer p { font-size:15px; color:var(--muted); line-height:1.8; font-weight:300; padding-bottom:28px; }
+        .faq-item.open .faq-answer { max-height:200px; }
+
+        /* ── CONTACT ── */
+        .contact { background:var(--navy); padding:112px 56px; text-align:center; position:relative; overflow:hidden; }
+        .contact::before {
+            content:''; position:absolute; top:50%; left:50%;
+            transform:translate(-50%,-50%);
+            width:600px; height:600px;
+            background:radial-gradient(circle, rgba(198,168,78,.07) 0%, transparent 65%);
+            pointer-events:none;
+        }
+        .contact-inner { max-width:600px; margin:0 auto; position:relative; z-index:1; }
+        .contact-tag { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:24px; }
+        .contact h2 { font-family:'DM Serif Display',Georgia,serif; font-size:52px; color:white; line-height:1.1; letter-spacing:-1px; margin-bottom:20px; }
+        .contact-sub { font-size:15px; color:rgba(255,255,255,.5); font-weight:300; line-height:1.75; margin-bottom:52px; }
+        .contact-email-link {
+            display:inline-block; font-size:15px; letter-spacing:.5px;
+            color:var(--gold); text-decoration:none;
+            border-bottom:1px solid rgba(198,168,78,.35); padding-bottom:3px; margin-bottom:44px;
+            transition: letter-spacing .3s, border-color .2s;
+        }
+        .contact-email-link:hover { letter-spacing:1.5px; border-color:var(--gold); }
+
+        /* ── FOOTER ── */
+        footer { background:#0f1e30; padding:32px 56px; display:flex; justify-content:space-between; align-items:center; }
+        footer p { font-size:12px; color:rgba(255,255,255,.3); }
+        .footer-logo { font-size:13px; font-weight:700; color:rgba(255,255,255,.4); letter-spacing:1px; }
+        .footer-logo span { color:var(--gold); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width:900px) {
+            body { cursor:auto; }
+            .cursor, .cursor-ring, .cursor-glow { display:none; }
+            a, button { cursor:pointer; }
+            header { padding:0 24px; } /* reste position:fixed, pas position:relative */
+            nav { display:none; flex-direction:column; position:fixed; top:72px; left:0; right:0; background:var(--cream); padding:16px; border-bottom:1px solid var(--line); gap:4px; }
+            nav.open { display:flex; }
+            nav a { padding:12px 14px; }
+            .hamburger { display:flex; }
+            .hero { grid-template-columns:1fr; min-height:auto; }
+            .hero-left { padding:64px 24px; min-height:85vh; }
+            .hero-left h1 { font-size:40px; }
+            .hero-right { display:none; } /* Three.js masqué sur mobile */
+            .values { padding:0 24px; }
+            .values-inner { grid-template-columns:1fr; }
+            .value-item { border-right:none; border-bottom:1px solid rgba(255,255,255,.06); padding-left:0; }
+            .deliverables { padding:72px 24px; }
+            .deliv-top { grid-template-columns:1fr; gap:16px; }
+            .deliv-row { grid-template-columns:48px 1fr; grid-template-rows:auto auto; }
+            .deliv-desc { grid-column:2; }
+            .deliv-num { font-size:22px; }
+            .process { padding:72px 24px; }
+            .process-steps { grid-template-columns:1fr; }
+            .process-step { border-right:none; }
+            .process-head { flex-wrap:wrap; }
+            .process-head h2 { white-space:normal; font-size:30px; }
+            .faq { padding:72px 24px; }
+            .contact { padding:80px 24px; }
+            .contact h2 { font-size:36px; }
+            footer { padding:28px 24px; flex-direction:column; gap:10px; text-align:center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<div class="cursor-glow" id="cursor-glow"></div>
+
+<!-- HEADER -->
+<header id="header">
+    <a href="#" class="logo">
+        <div class="logo-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+                <path d="M12 24 L20 14 L28 22" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M24 10 L30 10 L30 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="20" cy="28" r="2" fill="white"/>
+            </svg>
+        </div>
+        <span class="logo-name">Charle<span>Link</span></span>
+    </a>
+    <button class="hamburger" onclick="document.getElementById('main-nav').classList.toggle('open')">
+        <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav">
+        <a href="#livraison">Prestations</a>
+        <a href="#methode">Méthode</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="nav-cta">Devis gratuit</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="hero-left" id="hero-left">
+        <div class="hero-tag">Création de site web · Charleroi</div>
+        <h1>Votre site web,<br><em>enfin</em> à la<br>hauteur.</h1>
+        <p>Nous concevons des sites professionnels, rapides et optimisés — conçus pour convertir vos visiteurs en clients.</p>
+        <div class="hero-actions">
+            <a href="#contact" class="btn-dark">Demander un devis</a>
+            <a href="#livraison" class="btn-line">Voir nos prestations</a>
+        </div>
+    </div>
+    <div class="hero-right" id="hero-right">
+        <div id="three-hero"></div>
+        <div class="hero-stat">
+            <strong id="counter-num">0%</strong>
+            <span>Sur mesure</span>
+        </div>
+    </div>
+</section>
+
+<!-- VALEURS -->
+<div class="values reveal">
+    <div class="values-inner">
+        <div class="value-item">
+            <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            <div class="value-text"><strong>Design unique</strong><span>Aucun template générique</span></div>
+        </div>
+        <div class="value-item">
+            <div class="value-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="value-text"><strong>Livraison rapide</strong><span>En 1 à 2 semaines</span></div>
+        </div>
+        <div class="value-item">
+            <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div class="value-text"><strong>Satisfaction garantie</strong><span>Vous validez chaque étape</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- DELIVERABLES -->
+<section class="deliverables" id="livraison">
+    <div class="deliv-inner">
+        <div class="deliv-top">
+            <div class="reveal">
+                <p class="deliv-tag">Nos prestations</p>
+                <h2>Ce que nous livrons, sans compromis.</h2>
+            </div>
+            <p class="reveal d2">Chaque site est conçu sur mesure selon votre activité. Pas de template générique, pas de raccourcis.</p>
+        </div>
+        <div class="deliv-rows">
+            <div class="deliv-row reveal-left d1"><div class="deliv-num">01</div><div class="deliv-title">Design sur mesure</div><p class="deliv-desc">Un design pensé pour votre secteur et votre image. Chaque élément visuel est choisi pour servir votre positionnement.</p></div>
+            <div class="deliv-row reveal-left d2"><div class="deliv-num">02</div><div class="deliv-title">100 % responsive</div><p class="deliv-desc">Votre site s'affiche parfaitement sur mobile, tablette et ordinateur. La majorité de vos clients vous trouveront depuis leur téléphone.</p></div>
+            <div class="deliv-row reveal-left d3"><div class="deliv-num">03</div><div class="deliv-title">Optimisé pour Google</div><p class="deliv-desc">Structure SEO propre dès la conception : balises sémantiques, vitesse de chargement et balisage technique correctement mis en place.</p></div>
+            <div class="deliv-row reveal-left d4"><div class="deliv-num">04</div><div class="deliv-title">Chargement rapide</div><p class="deliv-desc">Un site lent dissuade vos visiteurs. Nous optimisons chaque page pour un chargement en moins de 2 secondes.</p></div>
+            <div class="deliv-row reveal-left d5"><div class="deliv-num">05</div><div class="deliv-title">Formulaire de contact</div><p class="deliv-desc">Vos visiteurs vous contactent directement depuis le site. Chaque demande vous est transmise par e-mail instantanément.</p></div>
+            <div class="deliv-row reveal-left d6"><div class="deliv-num">06</div><div class="deliv-title">Mise en ligne complète</div><p class="deliv-desc">Hébergement, nom de domaine, mise en ligne. Vous recevez votre site opérationnel, sans rien à configurer.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="methode">
+    <div class="process-inner">
+        <div class="process-head reveal">
+            <p class="process-tag">Notre méthode</p>
+            <div class="process-line"></div>
+            <h2>Simple. Clair. Efficace.</h2>
+        </div>
+        <div class="process-steps">
+            <div class="process-step reveal d1"><div class="step-num">01</div><h3>On écoute votre projet</h3><p>Vous nous expliquez votre activité, vos clients et vos objectifs. On prend note avant de produire quoi que ce soit.</p></div>
+            <div class="process-step reveal d2"><div class="step-num">02</div><h3>On conçoit et on développe</h3><p>On construit votre site et on vous le soumet à chaque étape clé. Vous validez avant qu'on avance.</p></div>
+            <div class="process-step reveal d3"><div class="step-num">03</div><h3>On livre et on met en ligne</h3><p>Une fois validé, on gère tout : hébergement, domaine, mise en ligne. Votre site est opérationnel sans délai.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+    <div class="faq-inner">
+        <div class="faq-header reveal">
+            <p class="faq-tag">Questions fréquentes</p>
+            <h2>Tout ce que vous voulez savoir.</h2>
+        </div>
+        <div class="faq-item reveal d1">
+            <div class="faq-question"><span>Combien coûte la création d'un site web ?</span><span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+            <div class="faq-answer"><p>Le tarif dépend de vos besoins et de la complexité du projet. Contactez-nous pour un devis gratuit et personnalisé — sans engagement.</p></div>
+        </div>
+        <div class="faq-item reveal d2">
+            <div class="faq-question"><span>Quel est le délai de livraison ?</span><span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+            <div class="faq-answer"><p>En règle générale, un site est livré en 1 à 2 semaines selon sa complexité. Nous vous tenons informé à chaque étape.</p></div>
+        </div>
+        <div class="faq-item reveal d3">
+            <div class="faq-question"><span>Puis-je modifier mon site après la livraison ?</span><span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+            <div class="faq-answer"><p>Oui. Nous vous accompagnons pour la prise en main. Des options de mise à jour et de maintenance sont également disponibles sur demande.</p></div>
+        </div>
+        <div class="faq-item reveal d4">
+            <div class="faq-question"><span>Est-ce que mon site sera visible sur Google ?</span><span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+            <div class="faq-answer"><p>Chaque site est construit avec une structure SEO propre dès le départ. Cela pose les bases d'un bon référencement naturel sur Google.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <div class="contact-inner reveal-scale">
+        <p class="contact-tag">Contact</p>
+        <h2>Parlons de votre projet.</h2>
+        <p class="contact-sub">Envoyez-nous un message. Nous vous répondons avec un devis clair dans les meilleurs délais.</p>
+        <a href="mailto:charlelink6000@gmail.com" class="contact-email-link">charlelink6000@gmail.com</a><br>
+        <a href="mailto:charlelink6000@gmail.com" class="btn-dark" style="background:var(--gold);color:#111;margin-top:8px;">Envoyer un message</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2026 CharleLink — Charleroi, Belgique</p>
+    <span class="footer-logo">Charle<span>Link</span></span>
+</footer>
+
+<!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+
+<script>
+/* ── CURSEUR ── */
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursor-ring');
+const glow   = document.getElementById('cursor-glow');
+let mx=0, my=0, rx=0, ry=0;
+
+document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx+'px'; cursor.style.top = my+'px';
+    glow.style.left   = mx+'px'; glow.style.top  = my+'px';
+    heroMouseX = (e.clientX/window.innerWidth  - .5) * 2;
+    heroMouseY = (e.clientY/window.innerHeight - .5) * 2;
+});
+
+(function animRing(){
+    rx += (mx-rx)*.13; ry += (my-ry)*.13;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(animRing);
+})();
+
+document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ cursor.style.width='16px'; cursor.style.height='16px'; ring.style.width='64px'; ring.style.height='64px'; ring.style.borderColor='rgba(198,168,78,.8)'; });
+    el.addEventListener('mouseleave',()=>{ cursor.style.width=''; cursor.style.height=''; ring.style.width=''; ring.style.height=''; ring.style.borderColor=''; });
+});
+
+/* ── THREE.JS HERO ── */
+let heroMouseX = 0, heroMouseY = 0;
+let targetRX = 0, targetRY = 0;
+
+(function initThree(){
+    const container = document.getElementById('three-hero');
+    const W = container.offsetWidth  || 420;
+    const H = container.offsetHeight || window.innerHeight - 72;
+
+    const scene    = new THREE.Scene();
+    const camera   = new THREE.PerspectiveCamera(55, W/H, .1, 100);
+    camera.position.z = 5;
+
+    const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+    renderer.setSize(W, H);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+    Object.assign(renderer.domElement.style, { position:'absolute', inset:'0', width:'100%', height:'100%' });
+    container.appendChild(renderer.domElement);
+
+    /* Torus knot principal */
+    const geom1  = new THREE.TorusKnotGeometry(1.1, .32, 160, 32);
+    const mat1   = new THREE.MeshPhongMaterial({ color:0xC6A84E, emissive:0x1C3356, shininess:120 });
+    const mesh1  = new THREE.Mesh(geom1, mat1);
+    scene.add(mesh1);
+
+    /* Wireframe autour */
+    const geom2 = new THREE.TorusKnotGeometry(1.1, .32, 160, 32);
+    const mat2  = new THREE.MeshBasicMaterial({ color:0xC6A84E, wireframe:true, transparent:true, opacity:.12 });
+    const mesh2 = new THREE.Mesh(geom2, mat2);
+    scene.add(mesh2);
+
+    /* Particules */
+    const pCount = 260;
+    const pPositions = new Float32Array(pCount * 3);
+    for(let i=0; i<pCount*3; i++) pPositions[i] = (Math.random()-.5)*14;
+    const pGeom = new THREE.BufferGeometry();
+    pGeom.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+    const pMat  = new THREE.PointsMaterial({ color:0xC6A84E, size:.06, transparent:true, opacity:.5 });
+    scene.add(new THREE.Points(pGeom, pMat));
+
+    /* Lumières */
+    scene.add(new THREE.AmbientLight(0xffffff, .3));
+    const pl1 = new THREE.PointLight(0xC6A84E, 3, 12);
+    pl1.position.set(3, 3, 3); scene.add(pl1);
+    const pl2 = new THREE.PointLight(0x5dade2, 2, 10);
+    pl2.position.set(-3, -3, 2); scene.add(pl2);
+
+    let t = 0;
+    function animate(){
+        requestAnimationFrame(animate);
+        t += .01;
+
+        targetRX += (heroMouseY * .8 - targetRX) * .06;
+        targetRY += (heroMouseX * .8 - targetRY) * .06;
+
+        mesh1.rotation.x = targetRX + t * .25;
+        mesh1.rotation.y = targetRY + t * .4;
+        mesh2.rotation.x = mesh1.rotation.x;
+        mesh2.rotation.y = mesh1.rotation.y;
+
+        pl1.position.x = Math.sin(t*.7) * 3;
+        pl1.position.y = Math.cos(t*.5) * 3;
+
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', ()=>{
+        const W2 = container.offsetWidth;
+        const H2 = container.offsetHeight;
+        camera.aspect = W2/H2;
+        camera.updateProjectionMatrix();
+        renderer.setSize(W2, H2);
+    });
+})();
+
+/* ── SCROLL ── */
+window.addEventListener('scroll', ()=>{
+    document.getElementById('header').classList.toggle('scrolled', scrollY > 40);
+    const hl = document.getElementById('hero-left');
+    if(hl && scrollY < window.innerHeight) hl.style.transform = `translateY(${scrollY*.12}px)`;
+}, { passive:true });
+
+/* ── REVEAL ── */
+document.body.classList.add('js-ready');
+const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold:0, rootMargin:'0px 0px -60px 0px' });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-scale').forEach(el=>obs.observe(el));
+
+/* ── 3D TILT ── */
+function addTilt(selector, strength=10){
+    document.querySelectorAll(selector).forEach(el=>{
+        el.addEventListener('mousemove', e=>{
+            const r = el.getBoundingClientRect();
+            const x = (e.clientX-r.left)/r.width  - .5;
+            const y = (e.clientY-r.top) /r.height - .5;
+            el.style.transform = `perspective(900px) rotateX(${-y*strength}deg) rotateY(${x*strength}deg) scale3d(1.02,1.02,1.02)`;
+        });
+        el.addEventListener('mouseleave', ()=>{
+            el.style.transition = 'transform .6s cubic-bezier(.16,1,.3,1)';
+            el.style.transform  = '';
+            setTimeout(()=>el.style.transition='', 600);
+        });
+    });
+}
+addTilt('.process-step', 10);
+addTilt('.deliv-row', 4);
+addTilt('.value-item', 6);
+
+/* ── COUNTER ── */
+const cEl = document.getElementById('counter-num');
+if(cEl){
+    const co = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+            if(!e.isIntersecting) return;
+            let start=null;
+            (function step(ts){ if(!start) start=ts; const p=Math.min((ts-start)/1400,1); const ease=1-Math.pow(1-p,3); cEl.textContent=Math.floor(ease*100)+'%'; if(p<1) requestAnimationFrame(step); })(performance.now());
+            co.unobserve(e.target);
+        });
+    },{ threshold:.5 });
+    co.observe(cEl);
+}
+
+/* ── FAQ ACCORDION ── */
+document.querySelectorAll('.faq-question').forEach(q=>{
+    q.addEventListener('click', ()=>{
+        const item = q.parentElement;
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+        if(!wasOpen) item.classList.add('open');
+    });
+});
+
+
+</script>
+</body>
+</html>
